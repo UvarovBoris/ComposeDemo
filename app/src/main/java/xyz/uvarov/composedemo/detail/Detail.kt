@@ -11,8 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.uvarov.composedemo.ui.theme.ComposeDemoTheme
 
 @Composable
-fun Detail() {
-    val viewModel: DetailViewModel = viewModel()
+fun Detail(viewModel: DetailViewModel) {
     val state by viewModel.state.collectAsState()
     Text(
         text = "Detail ${state.counter}",
@@ -26,6 +25,6 @@ fun Detail() {
 @Composable
 fun DetailPreview() {
     ComposeDemoTheme {
-        Detail()
+        Detail(viewModel())
     }
 }
