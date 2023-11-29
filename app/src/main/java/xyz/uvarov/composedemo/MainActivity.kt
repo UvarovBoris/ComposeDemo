@@ -9,9 +9,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.uvarov.composedemo.ui.detail.Detail
 import xyz.uvarov.composedemo.ui.list.List
@@ -31,11 +33,14 @@ class MainActivity : ComponentActivity() {
                     val rootNavController = rememberNavController()
                     NavHost(navController = rootNavController, startDestination = Screen.List.route) {
                         composable(Screen.List.route) {
-                            List(hiltViewModel()) {
-                                rootNavController.navigate(Screen.Detail.route)
+                            List(hiltViewModel()) { id ->
+                                rootNavController.navigate("detail/${id}")
                             }
                         }
-                        composable(Screen.Detail.route) {
+                        composable(
+                            Screen.Detail.route,
+                            arguments = listOf(navArgument(Screen.id) { type = NavType.IntType })
+                        ) {
                             Detail(hiltViewModel())
                         }
                     }
@@ -43,9 +48,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-sealed class Screen(val route: String) {
-    object List : Screen("list")
-    object Detail : Screen("detail")
 }

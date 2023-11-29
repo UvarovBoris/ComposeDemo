@@ -1,3 +1,5 @@
 package xyz.uvarov.composedemo.ui.detail
 
-data class DetailState(val counter: Int)
+import xyz.uvarov.composedemo.Item
+
+data class DetailUiState(val item: Item?)

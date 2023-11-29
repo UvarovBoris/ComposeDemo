@@ -19,7 +19,11 @@ class ListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ListUiState(emptyList()))
     val uiState: StateFlow<ListUiState> = _uiState.asStateFlow()
 
-    fun updateList() {
+    init {
+        updateItems()
+    }
+
+    private fun updateItems() {
         viewModelScope.launch {
             val newItems = repository.getItems()
             _uiState.update { it.copy(items = newItems) }
