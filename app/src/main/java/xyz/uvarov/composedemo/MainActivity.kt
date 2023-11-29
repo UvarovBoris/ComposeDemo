@@ -13,8 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import xyz.uvarov.composedemo.detail.Detail
-import xyz.uvarov.composedemo.list.List
+import xyz.uvarov.composedemo.ui.detail.Detail
+import xyz.uvarov.composedemo.ui.list.List
 import xyz.uvarov.composedemo.ui.theme.ComposeDemoTheme
 
 @AndroidEntryPoint

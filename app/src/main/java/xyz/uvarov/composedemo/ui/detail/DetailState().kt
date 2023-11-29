@@ -1,3 +1,3 @@
-package xyz.uvarov.composedemo.detail
+package xyz.uvarov.composedemo.ui.detail
 
 data class DetailState(val counter: Int)
