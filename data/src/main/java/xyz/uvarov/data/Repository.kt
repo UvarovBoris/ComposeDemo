@@ -1,5 +1,7 @@
 package xyz.uvarov.data
 
+import kotlinx.coroutines.delay
+
 interface Repository {
     suspend fun getItems(): List<Item>
     suspend fun getItem(id: Int): Item?
@@ -16,7 +18,7 @@ class RepositoryImpl() : Repository {
     }
 
     override suspend fun getItems(): List<Item> {
-//        delay(1000)
+        delay(1000)
         return items
     }
 
