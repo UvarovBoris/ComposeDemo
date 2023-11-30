@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
     init {
-        val id: Int = savedStateHandle.get<Int>(Screen.id)!!
+        val id: Int = savedStateHandle.get<Int>(Screen.Detail.id)!!
         updateItem(id)
     }
 

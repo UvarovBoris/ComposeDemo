@@ -34,12 +34,12 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = rootNavController, startDestination = Screen.List.route) {
                         composable(Screen.List.route) {
                             List(hiltViewModel()) { id ->
-                                rootNavController.navigate("detail/${id}")
+                                rootNavController.navigate(Screen.Detail.navigate(id))
                             }
                         }
                         composable(
                             Screen.Detail.route,
-                            arguments = listOf(navArgument(Screen.id) { type = NavType.IntType })
+                            arguments = listOf(navArgument(Screen.Detail.id) { type = NavType.IntType })
                         ) {
                             Detail(hiltViewModel())
                         }
