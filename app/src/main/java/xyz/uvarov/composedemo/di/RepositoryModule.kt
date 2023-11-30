@@ -1,18 +1,20 @@
 package xyz.uvarov.composedemo.di
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import xyz.uvarov.composedemo.Repository
-import xyz.uvarov.composedemo.RepositoryImpl
+import xyz.uvarov.data.Repository
+import xyz.uvarov.data.RepositoryImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
+object RepositoryModule {
 
     @Singleton
-    @Binds
-    abstract fun bindRepository(repositoryImpl: RepositoryImpl): Repository
+    @Provides
+    fun provideRepository(): Repository {
+        return RepositoryImpl()
+    }
 }

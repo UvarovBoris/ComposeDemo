@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import xyz.uvarov.composedemo.Repository
 import xyz.uvarov.composedemo.Screen
+import xyz.uvarov.data.Repository
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,13 +19,13 @@ class DetailViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    private val _uiState = MutableStateFlow(DetailUiState(null))
+    val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
+
     init {
         val id: Int = savedStateHandle.get<Int>(Screen.id)!!
         updateItem(id)
     }
-
-    private val _uiState = MutableStateFlow(DetailUiState(null))
-    val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
     private fun updateItem(id: Int) {
         viewModelScope.launch {

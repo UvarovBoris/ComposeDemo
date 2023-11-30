@@ -1,14 +1,11 @@
-package xyz.uvarov.composedemo
-
-import kotlinx.coroutines.delay
-import javax.inject.Inject
+package xyz.uvarov.data
 
 interface Repository {
     suspend fun getItems(): List<Item>
     suspend fun getItem(id: Int): Item?
 }
 
-class RepositoryImpl @Inject constructor() : Repository {
+class RepositoryImpl() : Repository {
 
     companion object {
         val items = listOf(
@@ -19,7 +16,7 @@ class RepositoryImpl @Inject constructor() : Repository {
     }
 
     override suspend fun getItems(): List<Item> {
-        delay(1000)
+//        delay(1000)
         return items
     }
 

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeDemo"
 include(":app")
+include(":data")

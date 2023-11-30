@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import xyz.uvarov.composedemo.Repository
+import xyz.uvarov.data.Repository
 import javax.inject.Inject
 
 @HiltViewModel
