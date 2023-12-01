@@ -4,8 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,6 +30,7 @@ import xyz.uvarov.composedemo.ui.theme.ComposeDemoTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -30,18 +40,44 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val rootNavController = rememberNavController()
-                    NavHost(navController = rootNavController, startDestination = Screen.List.route) {
-                        composable(Screen.List.route) {
-                            List(hiltViewModel()) { id ->
-                                rootNavController.navigate(Screen.Detail.navigate(id))
+                    Scaffold(
+                        floatingActionButton = {
+                            FloatingActionButton(onClick = {}) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null
+                                )
                             }
+                        },
+                        topBar = {
+                            TopAppBar(
+                                title = {
+                                    Text(text = "Compose demo")
+                                }
+                            )
                         }
-                        composable(
-                            Screen.Detail.route,
-                            arguments = listOf(navArgument(Screen.Detail.id) { type = NavType.IntType })
+                    ) { values ->
+                        val rootNavController = rememberNavController()
+                        NavHost(
+                            navController = rootNavController,
+                            startDestination = Screen.List.route,
+                            modifier = Modifier.padding(values)
                         ) {
-                            Detail(hiltViewModel())
+                            composable(Screen.List.route) {
+                                List(hiltViewModel()) { id ->
+                                    rootNavController.navigate(Screen.Detail.navigate(id))
+                                }
+                            }
+                            composable(
+                                Screen.Detail.route,
+                                arguments = listOf(
+                                    navArgument(Screen.Detail.id) {
+                                        type = NavType.IntType
+                                    }
+                                )
+                            ) {
+                                Detail(hiltViewModel())
+                            }
                         }
                     }
                 }
